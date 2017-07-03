@@ -1,12 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { BACKLOG } from '../../constants/taskStatuses';
+import Task from '../../components/Task';
+
 const Tasks = (props) => {
     return (
-        <div>
-            <h1>Tasks:</h1>
-            {props.tasks.map(task => <p>{task.title}</p>)}
-        </div>
+        <section>
+            <h2>Backlog</h2>
+            <ul>
+                {props.tasks
+                    .filter(task => task.status === BACKLOG)
+                    .map(task => <Task task={task} />)}
+            </ul>
+        </section>
     );
 }
 
@@ -16,10 +23,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToState = (dispatch) => {
-    return {
-
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToState)(Tasks);
+export default connect(mapStateToProps)(Tasks);

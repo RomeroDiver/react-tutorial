@@ -14,9 +14,13 @@ export const removeTask = (taskId) => ({
 export default function counter(state = [], action) {
   switch (action.type) {
   case ADD_TASK:
+    const newTask = {
+      id: state.length + 1,
+      ...action.payload
+    }
     return [
         ...state,
-        action.payload
+        newTask
     ];
   case REMOVE_TASK:
     return state.filter(task => task.id !== action.payload);
